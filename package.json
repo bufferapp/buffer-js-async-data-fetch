@@ -1,5 +1,5 @@
 {
-  "name": "@bufferapp/unauthorized-redirect",
+  "name": "@bufferapp/async-data-fetch",
   "version": "1.9.4-beta-01",
   "description": "Fetch data from RPC backend",
   "main": "lib/index.js",
