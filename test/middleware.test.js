@@ -141,4 +141,31 @@ describe('middleware', () => {
       error: RPCClient.fakeError,
     })
   })
+  it('should not dispatch a FETCH_SUCCESS action on error', async () => {
+    const store = {
+      dispatch: jest.fn(),
+      getState: () => ({
+        asyncDataFetch: {},
+      }),
+    }
+    const name = 'fail'
+    const args = {
+      test: 'yes',
+    }
+    const action = {
+      type: actionTypes.FETCH,
+      name,
+      args,
+    }
+    middleware(store)(() => {})(action)
+    await sleep() // give the event loop a chance to process promise
+    expect(store.dispatch).toHaveBeenCalledTimes(2)
+    expect(store.dispatch).toHaveBeenLastCalledWith({
+      type: `${name}_${actionTypes.FETCH_FAIL}`,
+      name,
+      args,
+      id: 0,
+      error: RPCClient.fakeError,
+    })
+  })
 })

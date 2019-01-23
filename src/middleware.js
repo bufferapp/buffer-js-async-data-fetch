@@ -24,16 +24,20 @@ export default store => {
 
         rpc
           .call(action.name, args)
-          .then(result =>
-            store.dispatch(
-              actions.fetchSuccess({
-                name: action.name,
-                args,
-                id,
-                result,
-              }),
-            ),
-          )
+          .then(result => {
+            console.log(result)
+
+            if (result) {
+              store.dispatch(
+                actions.fetchSuccess({
+                  name: action.name,
+                  args,
+                  id,
+                  result,
+                }),
+              )
+            }
+          })
           .catch(error => {
             console.error(error) // eslint-disable-line
             store.dispatch(
