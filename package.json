@@ -16,7 +16,7 @@
     "src"
   ],
   "dependencies": {
-    "micro-rpc-client": "^0.1.4"
+    "@bufferapp/micro-rpc-client": "1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
