@@ -1,5 +1,5 @@
 import sleep from 'then-sleep'
-import RPCClient from 'micro-rpc-client'
+import RPCClient from '@bufferapp/micro-rpc-client'
 import middleware from '../src/middleware'
 import { actionTypes } from '../src/reducer'
 
