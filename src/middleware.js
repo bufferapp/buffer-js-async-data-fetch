@@ -23,7 +23,9 @@ export default store => {
         )
 
         rpc
-          .call(action.name, args)
+          .call(action.name, args, {
+            'x-buffer-client-id': window.xBufferClientId || 'unknown-frontend',
+          })
           .then(result =>
             store.dispatch(
               actions.fetchSuccess({

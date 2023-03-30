@@ -87,7 +87,31 @@ describe('middleware', () => {
       }),
     }
     middleware(store)(() => {})(action)
-    expect(RPCClient.prototype.call).toBeCalledWith(name, args)
+    expect(RPCClient.prototype.call).toBeCalledWith(name, args, {
+      'x-buffer-client-id': 'unknown-frontend',
+    })
+  })
+  it('should pass the xBufferClientId as a header', () => {
+    window.xBufferClientId = 'test-client-id'
+    const name = 'fake rpc'
+    const args = {
+      test: 'yes',
+    }
+    const action = {
+      type: actionTypes.FETCH,
+      name,
+      args,
+    }
+    const store = {
+      dispatch: () => {},
+      getState: () => ({
+        asyncDataFetch: {},
+      }),
+    }
+    middleware(store)(() => {})(action)
+    expect(RPCClient.prototype.call).toBeCalledWith(name, args, {
+      'x-buffer-client-id': 'test-client-id',
+    })
   })
   it('should dispatch a FETCH_SUCCESS action', async () => {
     const store = {
